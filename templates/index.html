@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Video Popularity Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Video Popularity Analysis</h1>
+        <nav>
+            <ul>
+                <li><a href="/wordcloud">Word Cloud</a></li>
+                <li><a href="/clustering">Clustering Analysis</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Find the Most Popular Video</h2>
+            <form id="search-form">
+                <label for="search_key">Enter Search Key:</label>
+                <input type="text" id="search_key" name="search_key" required>
+                <button type="submit">Get Most Popular Video</button>
+            </form>
+            <div id="result"></div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchKey = document.getElementById('search_key').value;
+            fetch(`/data?search_key=${searchKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    if (data.error) {
+                        resultDiv.textContent = data.error;
+                    } else {
+                        resultDiv.innerHTML = `<h3>Most Popular Video</h3>
+                            <p>Title: ${data.title}</p>
+                            <p>Predicted Popularity Score: ${data.predicted_score}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
