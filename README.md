@@ -2,6 +2,10 @@
 
 This project analyzes the popularity of YouTube videos using data science techniques. The dataset includes various features such as video titles, descriptions, likes, comment counts, and upload dates. The project aims to predict the most popular videos using machine learning algorithms and visualize the results.
 
+
+![image](https://github.com/user-attachments/assets/a0fa712c-9d1b-40fe-ab3a-a00a90f655d8)
+
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
